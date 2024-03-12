@@ -1,10 +1,8 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useSnapshot } from 'valtio'
 import { state } from './store'
-import { Box } from './Canvas'
 
 export function Overlay() {
-  const snap = useSnapshot(state)
   const transition = { type: 'spring', duration: 0.8 }
   const config = {
     initial: { x: -100, opacity: 0, transition: { ...transition, delay: 0.5 } },
@@ -24,10 +22,7 @@ export function Overlay() {
 
 function Customizer() {
   const snap = useSnapshot(state)
-  // const snap = useSnapshot((state) => state.colors)
-  // const items = state((state) => state.items)
-  // const selected = state((state) => state.selected)
-  // const setItemColors = state((state) => state.setItemColors)
+  const items = state((state) => state.items)
 
   return (
     <div className="customizer">

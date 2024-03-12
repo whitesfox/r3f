@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { useGLTF, Environment, OrbitControls } from '@react-three/drei'
-import { easing, vector2 } from 'maath'
+import { Environment, OrbitControls } from '@react-three/drei'
+import { easing } from 'maath'
 import { state } from './store'
 import { useSnapshot } from 'valtio'
-import { Scene, Vector2, Vector3 } from 'three'
+import { Vector2, Vector3 } from 'three'
 
 export function App(props) {
   const position = [-2, 0, 10]
@@ -25,7 +25,6 @@ export function App(props) {
 
 const num = new Vector3()
 const num1 = new Vector2()
-// const boxposition = new Vector2();
 
 export function Box({ color, pos, id, selectedBox, setSelectedBox }) {
   const snap = useSnapshot(state)
@@ -49,8 +48,6 @@ export function Box({ color, pos, id, selectedBox, setSelectedBox }) {
     })
     state.boxs = newBoxs
   }, [snap.color])
-
-  // const [stateBoxadd, setStateBoxadd] = useState();
 
   useFrame((state, delta) => {
     easing.dampC(ref.current.color, color, 0.2, delta)
