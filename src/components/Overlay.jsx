@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useSnapshot } from 'valtio'
-import { state } from './store'
+import { state } from '../serve/store'
 
 export function Overlay() {
   const transition = { type: 'spring', duration: 0.8 }
@@ -22,8 +22,6 @@ export function Overlay() {
 
 function Customizer() {
   const snap = useSnapshot(state)
-  // const items = state((state) => state.items)
-  console.log(snap.boxs)
   return (
     <div className="customizer">
       <div className="color-options">
@@ -34,7 +32,7 @@ function Customizer() {
             style={{ background: color, transform: `scale(${state.color === color ? 1.2 : 1})` }}
             onClick={() => {
               const boxID = state.boxs.findIndex((item) => item.id === state.selectedID)
-              state.boxs[boxID].color = color
+              if (boxID > -1) state.boxs[boxID].color = color
             }}></div>
         ))}
       </div>
@@ -44,10 +42,17 @@ function Customizer() {
           onClick={() => {
             state.boxs = [...state.boxs, { color: state.color, pos: 0, id: state.lastIndex }]
             state.lastIndex = state.lastIndex + 1
+            console.log(state.boxs)
           }}>
           Add
         </button>
-        <button className="button" style={{ background: '#e00011' }} onClick={() => (state.boxs = snap.boxs.filter((item) => item.id !== snap.selectedID))}>
+        <button
+          className="button"
+          style={{ background: '#e00011' }}
+          onClick={() => {
+            if (state.selectedID > -1) state.boxs = state.boxs.filter((item) => item.id !== state.selectedID)
+            console.log(state.boxs)
+          }}>
           Delete
         </button>
       </div>
