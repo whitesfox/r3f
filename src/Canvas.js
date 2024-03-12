@@ -35,6 +35,8 @@ export function Box({ color, pos, id, selectedBox, setSelectedBox }) {
 
   const handleClick = (selectedId) => {
     setSelectedBox(selectedId)
+    state.selectedID = selectedId
+    console.log(state.selectedID)
   }
 
   useEffect(() => {

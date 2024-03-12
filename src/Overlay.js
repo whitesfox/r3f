@@ -22,8 +22,8 @@ export function Overlay() {
 
 function Customizer() {
   const snap = useSnapshot(state)
-  const items = state((state) => state.items)
-
+  // const items = state((state) => state.items)
+  console.log(snap.boxs)
   return (
     <div className="customizer">
       <div className="color-options">
@@ -40,6 +40,9 @@ function Customizer() {
           className="button"
           onClick={() => (state.boxs = [...state.boxs, { color: state.color, pos: state.boxs.length / 2, id: state.boxs.length + 1 }])}>
           Add
+        </button>
+        <button className="button" style={{ background: '#e00011' }} onClick={() => (state.boxs = snap.boxs.filter((item) => item.id !== snap.selectedID))}>
+          Delete
         </button>
       </div>
     </div>
