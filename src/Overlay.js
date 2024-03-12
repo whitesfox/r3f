@@ -32,7 +32,10 @@ function Customizer() {
             key={color}
             className={`circle`}
             style={{ background: color, transform: `scale(${state.color === color ? 1.2 : 1})` }}
-            onClick={() => (state.color = color)}></div>
+            onClick={() => {
+              const boxID = state.boxs.findIndex((item) => item.id === state.selectedID)
+              state.boxs[boxID].color = color
+            }}></div>
         ))}
       </div>
       <div className="button-options">
