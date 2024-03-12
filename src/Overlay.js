@@ -38,7 +38,10 @@ function Customizer() {
       <div className="button-options">
         <button
           className="button"
-          onClick={() => (state.boxs = [...state.boxs, { color: state.color, pos: state.boxs.length / 2, id: state.boxs.length + 1 }])}>
+          onClick={() => {
+            state.boxs = [...state.boxs, { color: state.color, pos: 0, id: state.lastIndex }]
+            state.lastIndex = state.lastIndex + 1
+          }}>
           Add
         </button>
         <button className="button" style={{ background: '#e00011' }} onClick={() => (state.boxs = snap.boxs.filter((item) => item.id !== snap.selectedID))}>
